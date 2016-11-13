@@ -1,0 +1,158 @@
+<ion-view class="forms-view">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-android-checkmark-circle" ng-click='nac.save()'></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <span class="font-light">{{ 'NUEVOACUERDO' | translate}}</span>
+  </ion-nav-title>
+  <ion-content>
+    <ion-list>
+	    <div class="item item-input-inset item-stacked-label">
+	      <span class="input-label">{{ 'CATEGORIA' | translate}}</span>
+		    <label class="item-input-wrapper">
+		      <select ng-model="nac.acuerdo.categoria_id" style="width: 100%">
+			      <option ng-repeat="categoria in nac.categorias" value="{{categoria._id}}">{{categoria.nombre}}</option>
+			    </select>
+		    </label>
+		  </div>
+	    <label class="item item-input-inset item-stacked-label">
+        <span class="input-label">{{ 'ACUERDO' | translate}}</span>
+        <label class="item-input-wrapper">
+	        <input type="text" ng-model="nac.acuerdo.titulo" class="full">
+        </label>
+      </label>
+      <label class="item item-input-inset item-stacked-label">
+        <span class="input-label">{{ 'DESCRIPCION' | translate}}</span>
+        <label class="item-input-wrapper">
+	        <textarea type="text" ng-model="nac.acuerdo.descripcion" rows="3" style="width: 100%; background-color: transparent;"></textarea>
+        </label>
+      </label>
+<!--  
+			<label class="item item-input">
+        <span class="input-label">{{ 'FECHAINICIO' | translate}}</span>
+        <input type="datetime" ng-model="nac.acuerdo.fechaInicio" readonly>
+      </label>
+      
+        <span class="input-label">{{ 'FECHAINICIO' | translate}}</span>
+        <input type="date" ng-model="nac.acuerdo.fechaInicio">
+-->
+			<div class="item" date ion-datetime-picker ng-model="nac.acuerdo.fechaInicio">
+	      <span class="input-label">{{ 'FECHAINICIO' | translate}}</span>
+        {{nac.acuerdo.fechaInicio| date: "dd-MM-yyyy"}}
+	    </div>
+      <div class="item" datetime ion-datetime-picker ng-model="nac.acuerdo.fechaLimite">
+	      <span class="input-label">{{ 'FECHALIMITE' | translate}}</span>
+        {{nac.acuerdo.fechaLimite| date: "dd-MM-yyyy H:mm:ss"}}
+	    </div>
+<!--
+      <label class="item item-input">
+        <span class="input-label">{{ 'FECHALIMITE' | translate}}</span>
+        <input type="date" ng-model="nac.acuerdo.fechaLimite" ng-click="nac.seleccionarFechaInicio()" >
+      </label>
+-->
+      <div class="item timeline-item" ng-click="nac.selResponsables()">
+	      {{ 'RESPONSABLES' | translate}}
+	      <div class="timeline-stats">
+          <i class="ion-person color-green"></i> {{nac.acuerdo.responsables.length}} 
+        </div>
+	    </div>
+	    <label class="item item-input-insert item-stacked-label range">
+        <span class="input-label color-green" ng-show="nac.acuerdo.prioridad == 0">{{ 'BAJA' | translate }}</span>
+		    <span class="input-label color-yellow" ng-show="nac.acuerdo.prioridad >= 50 && nac.acuerdo.prioridad <= 99">{{ 'MEDIA' | translate }}</span>
+		    <span class="input-label color-red" ng-show="nac.acuerdo.prioridad == 100">{{ 'ALTA' | translate }}</span>
+		    <label class="item-input-wrapper">
+	        <i class="icon ion-minus-round"></i>
+			    <input type="range" min="0" max="100" value="50" step="50" ng-model="nac.acuerdo.prioridad">
+			    <i class="icon ion-plus-round"></i>
+		    </label>
+      </label>
+      <div class="item item-input-inset item-stacked-label">
+	      <span class="input-label">{{ 'ESTADO' | translate}}</span>
+		    <label class="item-input-wrapper">
+		      <select id="fechaCierre" ng-model="nac.acuerdo.estatus" style="width: 100%" ng-change="nac.cambiarEstatus(nac.acuerdo, nac.acuerdo.estatus);" focus-on="fechaCierre">
+			      <option value="1">{{ 'ACTIVO' | translate}} </option>
+			      <option value="2">{{ 'CERRADO' | translate}}</option>
+			      <option value="3">{{ 'VENCIDO' | translate}}</option>
+			    </select>
+		    </label>
+		  </div>
+<!--
+		  <label class="item item-input">
+        <span class="input-label">{{ 'FECHACIERRE' | translate}}</span>
+        <input type="date" ng-model="nac.acuerdo.fechaCierre" focus-me="fechaCierre">
+      </label>
+-->
+      <div class="item" date ion-datetime-picker ng-model="nac.acuerdo.fechaCierre">
+	      <span class="input-label">{{ 'FECHACIERRE' | translate}}</span>
+        {{nac.acuerdo.fechaCierre| date: "dd-MM-yyyy"}}
+	    </div>
+      <label class="item item-input item-select">
+		    <div class="input-label">
+		      {{ 'REPETIR' | translate}}
+		    </div>
+		    <select ng-model="nac.acuerdo.repetir">
+		      <option>{{ 'NUNCA' | translate }}</option>
+		      <option>{{ 'TODOSLOSDIAS' | translate }}</option>
+		      <option>{{ 'CADASEMANA' | translate }}</option>
+		      <option>{{ 'CADADOS' | translate }}</option>
+		      <option>{{ 'CADAMES' | translate }}</option>
+		      <option>{{ 'CADAANO' | translate }}</option>
+		    </select>
+		  </label>
+		  <div class="item" date ion-datetime-picker ng-model="nac.acuerdo.hasta">
+	      <span class="input-label">{{ 'HASTA' | translate}}</span>
+        {{nac.acuerdo.hasta| date: "dd-MM-yyyy"}}
+	    </div>
+<!--
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">{{ 'HASTA' | translate}}</span>
+        <input type="date" ng-model="nac.acuerdo.hasta">
+      </label>
+-->
+      <div class="item timeline-item" ng-click="nac.selSeguidores()">
+	      {{ 'SEGUIDORES' | translate}}
+	      <div class="timeline-stats">
+          <i class="ion-person color-green"></i> {{nac.acuerdo.seguidores.length}}
+        </div>
+	    </div>
+	    <div class="item item-input-inset item-stacked-label">
+	      <span class="input-label">{{ 'TEMAS' | translate}}</span>
+		    <label class="item-input-wrapper">
+		      <input type="text" placeholder="" ng-model="nac.acuerdo.temas" class="full">
+		    </label>
+		  </div>
+		  
+      <ul class="list">
+	      <li class="item item-toggle">
+			     {{ 'AGREGARACALENDARIO' | translate}}
+			     <label class="toggle toggle-positive">
+			       <input type="checkbox" checked ng-model="nac.acuerdo.calendario">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			  <li class="item item-toggle">
+			     {{ 'RECORDATORIOS' | translate}}
+			     <label class="toggle toggle-positive">
+			       <input type="checkbox" checked ng-model="nac.acuerdo.recordatorios">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			</ul>
+    </ion-list>
+  </ion-content>
+</ion-view>
+<style>
+	.bar.app-top-bar {
+	  background-color: #82e79d;
+	  .title, .button {
+	    color: #000000 !important;
+	    * {
+	      color: #000000 !important;
+	    }
+	  }
+	}
+</style>

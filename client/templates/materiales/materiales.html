@@ -1,0 +1,27 @@
+<ion-view class="layouts-view">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-plus" ui-sref="app.nuevoMaterial"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <span>Materiales</span>
+  </ion-nav-title>
+  <ion-content>
+  	<div class="item item-input-inset">
+	    <label class="item-input-wrapper">
+	      <input type="text" placeholder="Buscar" ng-model="mc.buscar">
+	    </label>
+	  </div>
+		<ion-list
+          show-delete="mc.shouldShowDelete"
+          show-reorder="mc.shouldShowReorder"
+          can-swipe="mc.listCanSwipe">
+		  <ion-item ng-repeat="material in mc.materiales | filter:mc.buscar" ui-sref="app.editarMaterial({materialId : material._id})">
+		    <h2>{{material.nombre}}</h2>
+		    <p>{{material.unidad.nombre}}</p>
+		    <ion-option-button class="button-primary" ng-click="mc.eliminar(material)">
+		      Eliminar
+		    </ion-option-button>
+		  </ion-item>
+		</ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,46 @@
+<ion-view class="forms-view">
+	<ion-nav-buttons side="left">
+	</ion-nav-buttons>
+	<ion-nav-title>
+		<span class="font-light">Producto</span>
+	</ion-nav-title>
+	<ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-clear button-positive" ui-sref="app.editarProducto({productoId : pc.producto._id})">Editar</button>
+  </ion-nav-buttons>
+	<ion-content>
+		<ul class="list">
+			<ion-list can-swipe="listCanSwipe">
+			  <ion-item>			
+			    <h2>Nombre</h2>
+			    <p>{{pc.producto.nombre}}</p>
+			  </ion-item>
+			  <ion-item>			
+			    <h2>Unidad</h2>
+			    <p>{{pc.producto.unidad.nombre}}</p>
+			  </ion-item>
+			  <ion-item>			
+			    <h2>Descripción</h2>
+			    <p>{{pc.producto.descripcion}}</p>
+			  </ion-item>
+			  <div class="item item-button-right">
+			    Materiales
+			    <button class="button bg-color-green color-white" ng-click="pc.verMateriales = !pc.verMateriales;">
+			      <i class="fa fa-wrench"></i>
+			    </button>
+			  </div>
+			  <ion-item ng-repeat="material in pc.producto.detalleProducto" style="margin-left: 50px;" ng-show="pc.verMateriales">			
+			    {{material.nombre}}
+			    <p>{{material.unidad.nombre}}</p>
+			    <p class="item-note">
+				    {{material.cantidad}}
+				    <span ng-show="material.cantidad != undefined"> X {{material.precio | currency}} = {{material.cantidad * material.precio | currency}}</span>
+				  </p>
+			  </ion-item>
+			  <label class="item">
+	        Total
+	        <p class="item-note">{{pc.producto.precio | currency}}</p>
+	      </label>
+			</ion-list>
+    </ul>
+  </ion-content>
+</ion-view>

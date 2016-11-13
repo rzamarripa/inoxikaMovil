@@ -1,0 +1,32 @@
+<ion-view class="forms-view">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-clear button-positive" ng-click='nmc.save()'>Guardar</button>
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <span>Nuevo Material</span>
+  </ion-nav-title>
+  <ion-content>
+    <ul class="list">
+	    <label class="item item-input">
+        <span class="input-label">Nombre</span>
+        <input type="text" ng-model='nmc.material.nombre'>
+      </label>
+      <label class="item item-input item-select">
+		    <div class="input-label">
+		      Unidades
+		    </div>
+		    <select ng-model="nmc.material.unidad_id">
+		      <option value="{{unidad._id}}" ng-repeat="unidad in nmc.unidades">{{unidad.nombre}}</option>
+		    </select>
+		  </label>
+		  <label class="item item-input">
+        <span class="input-label">Precio</span>
+        <input type="text" ng-model='nmc.material.precio'>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Descripción</span>
+        <textarea rows="3" ng-model="nmc.material.descripcion"></textarea>
+      </label>
+    </ul>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,45 @@
+<ion-view class="forms-view">
+	<ion-nav-buttons side="left">
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button menu-toggle="right" class="button button-icon icon ion-android-checkmark-circle" ng-click='npc.save()'></button>
+	</ion-nav-buttons>
+	<ion-nav-title>
+		<span class="font-light" ng-if="!npc.productoId">Nuevo Producto</span>
+		<span class="font-light" ng-if="npc.productoId">Editar Producto</span>
+	</ion-nav-title>
+	<ion-content>
+		<ul class="list">
+			<label class="item item-input-inset item-stacked-label">
+				<span class="input-label">Nombre</span>
+				<label class="item-input-wrapper">
+					<input type="text" ng-model='npc.producto.nombre' class="full">
+				</label>
+			</label>
+			<label class="item item-input item-select">
+				<div class="input-label">
+					Unidad
+				</div>
+		    <select ng-model='npc.producto.unidad_id'>
+		      <option value="{{unidad._id}}" ng-repeat="unidad in npc.unidades">{{unidad.nombre}}</option>
+		    </select>
+		  </label>
+		  <label class="item item-input">
+        <span class="input-label">Descripción</span>
+        <textarea rows="3" ng-model="npc.producto.descripcion"></textarea>
+      </label>
+	    <div class="item timeline-item" ng-click="npc.selMateriales()">
+	      Materiales
+	      <div class="timeline-stats">
+          <i class="fa fa-wrench color-gray"></i> {{npc.producto.detalleProducto.length}}
+        </div>
+	    </div>
+	    <label class="item item-input">
+        <span class="input-label">Total</span>
+        <span class="item-note">
+	        {{npc.producto.precio | currency}}
+        </span>
+      </label>
+    </ul>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,110 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Materiales</h1>
+    <button class="button button-clear button-positive" ng-click="npc.cerrarModalMateriales()">Listo</button>
+  </ion-header-bar>
+  <ion-content>
+	  <label class="item item-input">
+	    <i class="icon ion-search placeholder-icon"></i>
+	    <input type="text" placeholder="Buscar en producto" ng-model="npc.buscarDetalle">
+	  </label>
+    <ion-list>
+    	<div class="divider-title">Agregados</div>
+    	<div ng-repeat="material in npc.producto.detalleProducto | filter:npc.buscarDetalle | orderBy : 'nombre'">
+		  	<ion-item class="item-stable" ng-click="npc.mostrarDetalle(material)" ng-class="{active: !npc.esMostrable(material)}">
+			  	<h2>
+						<i class="icon" ng-class="!npc.esMostrable(material) ? 'ion-minus' : 'ion-plus'"></i>
+						&nbsp;{{material.nombre}}
+					</h2>
+					
+					<p>{{material.unidad.nombre}}</p>
+					<div class="timeline-stats">
+						<p>{{material.precio | currency}}
+							<span ng-show="material.cantidad > 0"> X {{material.cantidad}} = {{(material.cantidad * material.precio) | currency}}</span>
+							<i ng-if="material.agregado" class="ion-ios-circle-filled icon-size-lg color-green"></i>
+						</p>
+					</div>
+			  </ion-item>
+			  <div ng-show="!material.estatus">
+				  <ion-item ng-show="!material.estatus" class="item-input item-accordion">
+						<span class="input-label">Cantidad</span>
+						<input type="number" ng-model='material.cantidad'>
+	        </ion-item>
+	        <ion-item ng-show="!material.estatus" class="item-input item-accordion">
+						<span class="input-label">Importe</span>
+						{{(material.cantidad * material.precio) | currency}}
+	        </ion-item>
+	        
+	        <button ng-show="material.agregado == undefined" class="button button-block button-assertive text-white" ng-click='npc.agregarMaterial(material)'>Agregar</button>
+	        <div class="row" ng-show="material.agregado == true">
+	        	<div class="col">
+	        		<button class="button button-block button-assertive text-white" ng-click='npc.editarMaterial(material)'>Editar</button>
+	        	</div>
+	        	<div class="col">
+	        		<button class="button button-block button-positive text-white" ng-click='npc.quitarMaterial(material)'>Quitar</button>
+	        	</div>
+	        </div>
+	        
+			  </div>
+			  
+		  </div>
+		  <div class="divider-title">Catálogo</div>
+		  <label class="item item-input">
+		    <i class="icon ion-search placeholder-icon"></i>
+		    <input type="text" placeholder="Buscar en catálogo" ng-model="npc.buscarMaterial">
+		  </label>
+		  <div ng-repeat="material in npc.materiales | filter:npc.buscarMaterial | orderBy : 'nombre'">
+		  	<ion-item class="item-stable" ng-click="npc.mostrarDetalle(material)" ng-class="{active: !npc.esMostrable(material)}">
+			  	<h2>
+						<i class="icon" ng-class="!npc.esMostrable(material) ? 'ion-minus' : 'ion-plus'"></i>
+						&nbsp;{{material.nombre}}
+					</h2>
+					
+					<p>{{material.unidad.nombre}}</p>
+					<div class="timeline-stats">
+						<p>{{material.precio | currency}}
+							<span ng-show="material.cantidad > 0"> X {{material.cantidad}} = {{(material.cantidad * material.precio) | currency}}</span>
+							<i ng-if="material.agregado" class="ion-ios-circle-filled icon-size-lg color-green"></i>
+						</p>
+					</div>
+			  </ion-item>
+			  <div ng-show="!material.estatus">
+				  <ion-item ng-show="!material.estatus" class="item-input item-accordion">
+						<span class="input-label">Cantidad</span>
+						<input type="number" ng-model='material.cantidad'>
+	        </ion-item>
+	        <ion-item ng-show="!material.estatus" class="item-input item-accordion">
+						<span class="input-label">Importe</span>
+						{{(material.cantidad * material.precio) | currency}}
+	        </ion-item>
+	        
+	        <button ng-show="material.agregado == undefined" class="button button-block button-assertive text-white" ng-click='npc.agregarMaterial(material)'>Agregar</button>
+	        <div class="row" ng-show="material.agregado == true">
+	        	<div class="col">
+	        		<button class="button button-block button-assertive text-white" ng-click='npc.editarMaterial(material)'>Editar</button>
+	        	</div>
+	        	<div class="col">
+	        		<button class="button button-block button-positive text-white" ng-click='npc.quitarMaterial(material)'>Quitar</button>
+	        	</div>
+	        </div>
+	        
+			  </div>
+			  
+		  </div>
+		</ion-list>
+  </ion-content>
+</ion-modal-view>
+
+
+<!--
+
+<ion-checkbox ng-repeat='material in npc.materiales | filter:npc.buscar:strict | orderBy : "nombre"' ng-model="material.estatus" ng-click='nrc.agregarMaterial(material, $index)'>
+		  	<div class="row">
+				  <div class="col small">{{material.nombre}}</div>
+				  <div class="col">.col</div>
+				  <div class="col">.col</div>
+				  <div class="col">.col</div>
+				  <div class="col">.col</div>
+				</div>
+		  </ion-checkbox>
+-->

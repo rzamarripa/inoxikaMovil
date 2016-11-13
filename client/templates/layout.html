@@ -1,0 +1,57 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content class="post-size-14px">
+    <ion-nav-bar class="bar app-top-bar">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left" class="main-menu" expose-aside-when="large">
+    <ion-content>
+      <ion-list style="background: url('images/home/Home-03.png'); background-size: 100%;">
+        <ion-item class="heading-item item item-avatar" nav-clear menu-close ui-sref="app.perfil">
+          <div class="user-image-container">
+            <pre-img ratio="_1_1" helper-class="rounded-image">
+              <img class="user-image" src="{{currentUser.profile.picture}}" spinner-on-load>
+            </pre-img>
+          </div>
+          <h2 class="greeting">{{ 'HOLA' | translate }}{{currentUser.profile.name}}</h2>
+          <p class="message">{{ 'BIENVENIDO' | translate }}</p>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.home">
+          <i class="icon fa fa-home"></i>
+          <h2 class="menu-text">{{ 'MENUINICIO' | translate }}</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.materiales">
+          <i class="icon fa fa-wrench"></i>
+          <h2 class="menu-text">Materiales</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.productos">
+          <i class="icon fa fa-check"></i>
+          <h2 class="menu-text">Productos</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.cotizaciones">
+          <i class="icon fa fa-file-o"></i>
+          <h2 class="menu-text">Cotizaciones</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.produccion">
+          <i class="icon fa fa-file-o"></i>
+          <h2 class="menu-text">Producción</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.compras">
+          <i class="icon fa fa-file-o"></i>
+          <h2 class="menu-text">Compras</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="auth.logout">
+          <i class="icon fa fa-sign-out"></i>
+          <h2 class="menu-text">{{ 'CERRARSESION' | translate }}</h2>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
